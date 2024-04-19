@@ -1,0 +1,45 @@
+.alert {
+    left: 0;
+    top: 0;
+    margin-top: 40vh;
+    z-index: 3;
+    position: fixed;
+    border-radius: 10px;
+    padding: 30px 30px 40px 30px;
+    background-color: #313338;
+    width: 600px;
+    left: calc(50vw - 300px);
+    box-shadow: 0px 8px 8px rgba(16, 24, 40, .25);
+}
+
+.alert_cross-icon {
+    width: 40px;
+    height: 40px;
+    color: #4E4F54;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    border-radius: 100px;
+    padding: 5px;
+    transition: all .3s;
+}
+
+.alert_cross-icon:hover {
+    color: #6c6d74;
+}
+
+@media screen and (max-width: 630px) {
+    .alert {
+        width: 90%;
+        left: 5%;
+        padding: 15px 15px 20px 15px;
+    }
+
+    .alert_cross-icon {
+        width: 30px;
+        height: 30px;
+        right: 10px;
+        top: 10px;
+    }
+}

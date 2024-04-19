@@ -1,0 +1,14 @@
+.card{
+    background-color: #313338;
+    padding: 30px 30px 40px 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #6b6a7c38;
+    box-shadow: 0px 8px 8px rgba(16, 24, 40, .25);
+}
+
+@media screen and (max-width: 400px){
+    .card{
+        padding: 15px 10px 20px 10px;
+    }
+}

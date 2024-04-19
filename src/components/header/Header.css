@@ -1,0 +1,27 @@
+.header {
+    padding-top: 20px;
+    position: fixed;
+}
+
+.header_ctn {
+    padding: 0;
+}
+
+.header-btn {
+    padding: 10px;
+    background-color: #313338;
+    border-radius: 10px;
+    border: 1px solid #6b6a7c38;
+    box-shadow: 0px 8px 8px rgba(16, 24, 40, .25);
+    transition: .1s all;
+}
+
+.header-btn-icon {
+    width: 30px;
+    height: 30px;
+    color: #fff;
+}
+
+.header-btn:hover{
+    background-color: #373941;
+}

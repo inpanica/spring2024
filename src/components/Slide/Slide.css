@@ -1,0 +1,24 @@
+.slide-banner{
+    border-radius: 10px;
+    object-fit: cover;
+    width: 500px;
+    height: 500px; 
+}
+
+.silde{
+    box-shadow: 0px 8px 8px rgba(16, 24, 40, .25);
+    position: relative;
+    width: 500px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.slide-title{
+    z-index: 1;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    background-color: #313338;
+    border: 1px solid #6b6a7c38;
+    box-shadow: 0px 8px 8px rgba(16, 24, 40, .25);
+}
