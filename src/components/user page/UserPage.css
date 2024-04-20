@@ -1,0 +1,101 @@
+.logout-btn {
+    background-color: #ed004f;
+    padding: 10px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logout-btn:hover {
+    box-shadow: 0px 5px 10px rgba(231, 6, 55, 0.5);
+}
+
+.logout-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.user-page {
+    position: relative;
+}
+
+.username {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 600px) {
+    .logout-btn {
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .logout-btn {
+        padding: 5px;
+    }
+
+    .logout-icon {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+.user-data {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.user-role{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.user-photo {
+    object-fit: cover;
+    align-self: flex-start;
+    width: 120px;
+    height: 120px;
+    margin-right: 20px;
+    border-radius: 100px;
+}
+
+.user-about {
+    font-size: 14px;
+    margin-top: 20px;
+    width: max-content;
+}
+
+.edit_btn{
+    background-color: #2ebe59;
+    right: 80px;
+}
+
+.edit_btn:hover{
+    box-shadow: 0px 5px 10px rgba(6, 231, 36, 0.5);
+}
+
+.user-photo_change{
+    cursor: pointer;
+}
+
+.user-photo_change:hover{
+    border: 1px solid #919191;
+}
+
+.desc{
+    color: #919191;
+}
+
+.team-invite{
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.team-invite-photo{
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

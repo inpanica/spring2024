@@ -7,3 +7,69 @@
 .team-btn{
     width: max-content !important;
 }
+
+.user{
+    display: flex;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    align-items: center;
+    position: relative;
+}
+
+.user-info-photo{
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+
+.users-all > :not(:last-child){
+    border-bottom: 1px solid #6b6a7c38;
+}
+
+.remove-btn{
+    top: 10px !important;
+}
+
+.add-btn{
+    top: 10px !important;
+    background-color: #006DED !important;
+}
+
+.add-btn:hover{
+    box-shadow: 0px 5px 10px rgba(0, 97, 211, .5) !important;
+}
+
+.team-photo-change{
+    border-radius: 10px !important;
+    width: 250px !important;
+    height: 250px !important;
+    object-fit: cover;
+}
+
+.team-photo:hover{
+    border: none !important;
+}
+
+.team-photo{
+    cursor: default !important;
+    margin-bottom: 20px;
+}
+
+.team-name{
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.team-btns{
+    top: -10px !important;
+}
+
+@media screen and (max-width: 400px){
+    .team-btns{
+        top: 0px !important;
+    }
+}

@@ -1,0 +1,30 @@
+.case-page{
+    display: flex;
+    flex-direction: column;
+}
+
+.case-btn{
+    margin-bottom: 20px;
+}
+
+.user-photo {
+    margin-bottom: 20px;
+}
+
+.case{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.case-name{
+
+}
+
+.case-company{
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.cases > :not(:last-child){
+    border-bottom: 1px solid #919191;
+}

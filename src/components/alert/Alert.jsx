@@ -6,8 +6,8 @@ function Alert({active, setActive, actionFunction, title, text, ...props}) {
 
 
     const acceptFunction = () => {
-        setActive(false);
         actionFunction();
+        setActive(false);
     }
 
     return (

@@ -1,6 +1,7 @@
 .header {
     padding-top: 20px;
     position: fixed;
+    z-index: 100;
 }
 
 .header_ctn {

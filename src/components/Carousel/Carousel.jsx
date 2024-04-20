@@ -20,11 +20,12 @@ function Carousel({ slides, ...props }) {
     };
 
     return (
-        <>
+        <>  
+            <h2 className="main-title">Главная</h2>
             <Flicking onReady={updateTransform} onMove={updateTransform} circular={false}>
                 {
-                    slides.map((slide, index) => {
-                        return <Panel index={index} key={index}><Slide name={slide.name} banner={slide.banner} link={slide.link}></Slide></Panel>
+                    slides.map((slide) => {
+                        return <Panel index={slide.id_t} key={slide.id_t}><Slide name={slide.name} banner={slide.banner}></Slide></Panel>
                     })
                 }
             </Flicking>

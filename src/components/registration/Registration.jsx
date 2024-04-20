@@ -7,6 +7,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Card from '../card/Card.jsx'
 import { login, register, getUser } from '../../actions.js'
 import { Link } from 'react-router-dom'
+import config from '../../config.js'
 
 function Registration({ setUser, ...props }) {
 
@@ -24,6 +25,12 @@ function Registration({ setUser, ...props }) {
     const [secondPassword, setSecondPassword] = useState('')
 
     const [error, setError] = useState('')
+
+    const add100Users = async () => {
+        config.users.map(async (u) => {
+            const response = await register(u.first_name, u.last_name, u.father_name, u.role, u.about, u.password, u.email)
+        })
+    }
 
     const buttonSubmit = async () => {
         if (password !== secondPassword) {
@@ -43,7 +50,7 @@ function Registration({ setUser, ...props }) {
                     localStorage.setItem('access', loginResponse.data.access_token)
                     localStorage.setItem('refresh', loginResponse.data.refresh_token)
                     const getResponse = await getUser(localStorage.getItem('access'));
-                    if(getResponse.status === 200){
+                    if (getResponse.status === 200) {
                         setUser(getResponse.data)
                     }
                     setPassword('')
@@ -71,8 +78,8 @@ function Registration({ setUser, ...props }) {
                         <h1 className="main-title">
                             Регистрация участника
                         </h1>
-                        <Input placeholder="Имя" inputValue={firstName} changeValueFun={(e) => setFirstName(e.target.value)} />
                         <Input placeholder="Фамилия" inputValue={lastName} changeValueFun={(e) => setLastName(e.target.value)} />
+                        <Input placeholder="Имя" inputValue={firstName} changeValueFun={(e) => setFirstName(e.target.value)} />
                         <Input placeholder="Отчество" inputValue={fatherName} changeValueFun={(e) => setFatherName(e.target.value)} />
                         <Input placeholder="Почта" inputValue={email} changeValueFun={(e) => setEmail(e.target.value)} />
                         <Input placeholder="Направление" inputValue={role} changeValueFun={(e) => setRole(e.target.value)} />
@@ -98,9 +105,13 @@ function Registration({ setUser, ...props }) {
                             </IconButton>
                         </div>
                         <Button onClick={buttonSubmit} className='reg_send_button main-button_fill' >Зарегистрироваться</Button>
+                        <Button onClick={add100Users} className='reg_send_button main-button_fill' >БОМБА</Button>
                         <p className={["registration-alternate-description error-massage", error ? '' : 'error-massage-hidden'].join(' ')}>{error}</p>
-                        <p className="registration-alternate-description main-text no-margin">
+                        <p className="registration-alternate-description main-text ">
                             Уже есть аккаунт? <Link to={'/authorization'} className="registration-alternate-description-link">Войти</Link>
+                        </p>
+                        <p className="registration-alternate-description main-text no-margin">
+                            <Link to={'/authorization-org'} className="registration-alternate-description-link ">Вход для кейсодержателей</Link>
                         </p>
                     </div>
                 </div>

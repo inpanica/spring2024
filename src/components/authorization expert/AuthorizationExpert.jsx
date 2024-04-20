@@ -1,4 +1,4 @@
-import './Authorization.css'
+import './AuthorizationExpert.css'
 import Button from '../button/Button.jsx'
 import Input from '../input/Input.jsx'
 import IconButton from '../icon button/IconButton.jsx'
@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from 'react-router-dom'
 import Card from '../card/Card.jsx'
-import { login, getUser } from '../../actions.js'
+import { login, getUser, loginExpert, getExpert } from '../../actions.js'
 
-function Authorization({ setUser, ...props }) {
+function AuthorizationExpert({ setUser, ...props }) {
 
     const [email, setEmail] = useState('')
 
@@ -22,17 +22,16 @@ function Authorization({ setUser, ...props }) {
             setError('Все поля должны быть заполнены')
         }
         else {
-            const response = await login(email, password)
+            const response = await loginExpert(email, password);
             if (response.status === 400) {
                 setError(response.data.detail)
             }
             if (response.status === 201) {
                 localStorage.setItem('access', response.data.access_token)
                 localStorage.setItem('refresh', response.data.refresh_token)
-                const getResponse = await getUser(localStorage.getItem('access'));
+                const getResponse = await getExpert(localStorage.getItem('access'));
                 if (getResponse.status === 200) {
                     setUser(getResponse.data);
-                    props.setUserChanged(!props.userChanged)
                 }
                 setPassword('')
                 setEmail('')
@@ -66,7 +65,7 @@ function Authorization({ setUser, ...props }) {
                         <Button onClick={buttonSubmit} className='reg_send_button main-button_fill'>Войти</Button>
                         <p className={["registration-alternate-description error-massage", error ? '' : 'error-massage-hidden'].join(' ')}>{error}</p>
                         <p className="registration-alternate-description main-text no-margin">
-                            Еще не зарегистрировались? <Link to={'/registration'} className="registration-alternate-description-link">Регистрация</Link>
+                            <Link to={'/authorization'} className="registration-alternate-description-link">Вход для участников</Link>
                         </p>
                     </div>
                 </div>
@@ -75,4 +74,4 @@ function Authorization({ setUser, ...props }) {
     )
 }
 
-export default Authorization
+export default AuthorizationExpert
