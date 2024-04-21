@@ -451,3 +451,92 @@ export const addNewCase = async (name, about, id, token) => {
         return e.response
     }
 }
+
+export const deleteCase = async (id) => {
+    try {
+        const response = await axios.delete(config.url + `/experts/case?id_ca=${id}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+        return response
+    }
+    catch (e) {
+        return e.response
+    }
+}
+
+export const addCaseFile = async (id, formdata, token) => {
+    try {
+        const response = await axios.patch(config.url + `/experts/file?id_ca=${id}`, formdata, {
+            headers: {
+                'Authorization': `Selezenka ${token}`,
+                'Content-Type': 'multipart/formdata'
+            }
+        })
+        return response
+    }
+    catch (e) {
+        return e.response
+    }
+}
+
+export const teamAddJob = async (id_ca, id_t, token) => {
+    try {
+        const response = await axios.post(config.url + `/teams/job`,
+        {
+            id_ca: id_ca,
+            id_t: id_t
+        },
+            {
+                headers: {
+                    'Authorization': `Selezenka ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+        return response
+    }
+    catch (e) {
+        return e.response
+    }
+}
+
+export const getJobByTeam = async (id_t, token) => {
+    try {
+        const response = await axios.get(config.url + `/teams/job?id_t=${id_t}`,
+            {
+                headers: {
+                    'Authorization': `Selezenka ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+        return response
+    }
+    catch (e) {
+        return e.response
+    }
+}
+
+export const changeJob = async (id_j, github, token) => {
+    try {
+        const response = await axios.patch(config.url + `/teams/job`,{
+            id_j: id_j,
+            github: github
+        },
+            {
+                headers: {
+                    'Authorization': `Selezenka ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+        return response
+    }
+    catch (e) {
+        return e.response
+    }
+}

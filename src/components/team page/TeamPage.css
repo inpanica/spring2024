@@ -24,6 +24,9 @@
     object-fit: cover;
 }
 
+.case-members{
+    position: relative;
+}
 
 .users-all > :not(:last-child){
     border-bottom: 1px solid #6b6a7c38;
@@ -31,6 +34,11 @@
 
 .remove-btn{
     top: 10px !important;
+}
+
+.job-btn{
+    right: 20px !important;
+    top: 70px !important;
 }
 
 .add-btn{

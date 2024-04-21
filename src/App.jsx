@@ -4,7 +4,7 @@ import Registration from './components/registration/Registration.jsx';
 import Authorization from './components/authorization/Authorization.jsx';
 import Carousel from './components/Carousel/Carousel.jsx'
 import Header from './components/header/Header.jsx'
-import { getAllTeams, getCases, getCompany, getExpert, getTeam, getTeamMembers, getUser, inviteByTeam, inviteByUser, refreshToken } from './actions.js';
+import { getAllTeams, getCases, getCompany, getExpert, getJobByTeam, getTeam, getTeamMembers, getUser, inviteByTeam, inviteByUser, refreshToken } from './actions.js';
 import { useEffect, useState } from 'react';
 import TeamPage from './components/team page/TeamPage.jsx';
 import UserPage from './components/user page/UserPage.jsx'
@@ -17,12 +17,13 @@ function App() {
     const [userChanged, setUserChanged] = useState(false)
     const [user, setUser] = useState({});
     const [team, setTeam] = useState({});
-    const [teamMembers, setTeamMembers] = useState([]);
+    const [teamMembers, setTeamMembers] = useState([{}]);
     const [invites, setInvites] = useState([]);
     const [teamInvites, setTeamInvites] = useState([]);
     const [allTeams, setAllTeams] = useState([])
     const [cases, setCases] = useState([])
     const [company, setCompany] = useState({})
+    const [teamJob, setTeamJob] = useState({})
 
     const appendUser = (data) => {
         setUser(
@@ -82,6 +83,8 @@ function App() {
                 setTeamMembers(response.data.detail);
                 const responseInvites = await inviteByTeam(team.id_t, localStorage.getItem('access'));
                 setTeamInvites(responseInvites.data);
+                const responseJob = await getJobByTeam(team.id_t, localStorage.getItem('access'))
+                setTeamJob(responseJob.data)
             }
         }
         getTeamUsers();
@@ -133,17 +136,20 @@ function App() {
         getMyInvites()
     }, [user])
 
+    useEffect(() => {console.log(teamJob, 't')}, [teamJob])
+    
     return (
         <>
             <BrowserRouter>
                 <div className="ctn">
                     {user.id &&
-                        <Header user={user}></Header>
+                        <Header team={team} user={user}></Header>
                     }
                     <div className="content">
                         {user.id ?
                             <Routes>
                                 <Route path='/team' element={<TeamPage
+                                    teamJob={teamJob}
                                     teamInvites={teamInvites}
                                     teamMembers={teamMembers}
                                     userChanged={userChanged}
@@ -162,7 +168,7 @@ function App() {
                                 {invites.map((i) => {
                                     return <Route path={'/' + i.id_i + '/' + i.id_u} element={<Autoinvite invite={i} />} />
                                 })}
-                                <Route path='/case' element={<CasePage company={company} cases={cases} user={user}/>} />
+                                <Route path='/case' element={<CasePage team={team} teamJob={teamJob} teamMembers={teamMembers} userChanged={userChanged} setUserChanged={setUserChanged} company={company} cases={cases} user={user}/>} />
                                 <Route path='/*' element={<Navigate to='/' />} />
                             </Routes> :
                             <Routes>

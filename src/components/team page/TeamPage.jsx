@@ -7,10 +7,10 @@ import config from '../../config';
 import { BiUndo } from "react-icons/bi";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
-import { addInvite, addTeam, changeTeam, changeTeamBanner, deleteTeam, getAllUsers, getTeam, inviteRefuse, notificationDelete, removeFromTeam } from '../../actions';
+import { addInvite, addTeam, changeJob, changeTeam, changeTeamBanner, deleteTeam, getAllUsers, getTeam, inviteRefuse, notificationDelete, removeFromTeam } from '../../actions';
 import { IoPersonAddSharp, IoPersonRemoveSharp } from "react-icons/io5";
 
-function TeamPage({ user, team, setTeam, userChanged, setUserChanged, ...props }) {
+function TeamPage({ teamJob, user, team, setTeam, userChanged, setUserChanged, ...props }) {
 
     const [formActive, setFormActive] = useState(false)
     const [editActive, setEditActive] = useState(false)
@@ -21,6 +21,8 @@ function TeamPage({ user, team, setTeam, userChanged, setUserChanged, ...props }
     const [name, setName] = useState('')
     const [about, setAbout] = useState('')
     const [banner, setBanner] = useState('')
+    const [github, setGithub] = useState('')
+    const [githubActive, setGithubActive] = useState('')
 
     const bannerRef = useRef(null)
     const photoRef = useRef(null)
@@ -128,6 +130,17 @@ function TeamPage({ user, team, setTeam, userChanged, setUserChanged, ...props }
         setUserChanged(!userChanged)
     }
 
+    const changeGithub = async () => {
+        if(github !== ''){
+            const response = await changeJob(teamJob.id_j, github, localStorage.getItem('access'))
+            if(response.status === 200) {
+                setGithub('')
+                setGithubActive(false)
+                setUserChanged(!userChanged)
+            }
+        }
+    }
+
     const filtredUsers = users.filter(u => {
         return (u.first_name + ' ' + u.last_name).toLowerCase().includes(searchQuery.toLowerCase())
     })
@@ -199,28 +212,46 @@ function TeamPage({ user, team, setTeam, userChanged, setUserChanged, ...props }
                                                             <Button onClick={() => { deleteUserFun(m) }} className='main-button_fill logout-btn remove-btn'><IoPersonRemoveSharp className='logout-icon'></IoPersonRemoveSharp></Button>
                                                         }
                                                     </div>
-                                                    
+
                                                 })}
                                             </div>
                                             {
                                                 props.teamInvites[0] &&
                                                 <div className="team-members">
-                                                <p className='main-title'>Приглашённые участники</p>
-                                                {props.teamInvites.map((m) => {
-                                                    return <div className='user' key={m.id_i}>
-                                                        <img src={config.url + '/' + m.user.photo} alt="" className="user-info-photo" />
-                                                        <div className="user-info-text">
-                                                            <div className="main-text no-margin">{m.user.first_name + ' ' + m.user.last_name}</div>
-                                                            <div className="main-text desc no-margin">{m.user.role}</div>
+                                                    <p className='main-title'>Приглашённые участники</p>
+                                                    {props.teamInvites.map((m) => {
+                                                        return <div className='user' key={m.id_i}>
+                                                            <img src={config.url + '/' + m.user.photo} alt="" className="user-info-photo" />
+                                                            <div className="user-info-text">
+                                                                <div className="main-text no-margin">{m.user.first_name + ' ' + m.user.last_name}</div>
+                                                                <div className="main-text desc no-margin">{m.user.role}</div>
+                                                            </div>
+                                                            {
+                                                                (m.type !== 'teamlead') &&
+                                                                <Button onClick={() => { deleteInviteFun(m) }} className='main-button_fill logout-btn remove-btn'><IoPersonRemoveSharp className='logout-icon'></IoPersonRemoveSharp></Button>
+                                                            }
                                                         </div>
-                                                        {
-                                                            (m.type !== 'teamlead') &&
-                                                            <Button onClick={() => { deleteInviteFun(m) }} className='main-button_fill logout-btn remove-btn'><IoPersonRemoveSharp className='logout-icon'></IoPersonRemoveSharp></Button>
-                                                        }
-                                                    </div>
-                                                    
-                                                })}
-                                            </div>}
+
+                                                    })}
+                                                </div>}
+                                            {
+                                                !(teamJob.case === undefined) &&
+                                                <div className="case-members">
+                                                    <p className='main-title'>Выбранный кейс</p>
+                                                    <p className="main-text no-margin">{teamJob.case.company}</p>
+                                                    <p className="main-text">{teamJob.case.name}</p>
+                                                    {
+                                                        githubActive ?
+                                                            <>
+                                                                <Input placeholder='github' inputValue={github} changeValueFun={(e) => { setGithub(e.target.value) }}></Input>
+                                                                <Button onClick={changeGithub}>Сохранить</Button>
+                                                            </> :
+                                                            <p className="main-text">{'github: ' + (teamJob.github !== null ? teamJob.github : 'не указан')}</p>
+                                                    }
+                                                    <Button onClick={() => { setGithubActive(!githubActive) }} className='main-button_fill logout-btn edit_btn job-btn'><CiEdit className='logout-icon'></CiEdit></Button>
+                                                </div>
+                                            }
+
                                         </div>
                                     }
                                 </>

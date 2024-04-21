@@ -14,10 +14,16 @@
 .case{
     padding-top: 10px;
     padding-bottom: 10px;
+    position: relative;
 }
 
 .case-name{
+    
+}
 
+.case-del{
+    top: 10px !important;
+    right: 80px !important;
 }
 
 .case-company{
@@ -27,4 +33,26 @@
 
 .cases > :not(:last-child){
     border-bottom: 1px solid #919191;
+}
+
+.case-file{
+    top: 10px !important;
+    background-color: #006DED;
+}
+
+.case-file:hover{
+    box-shadow: 0px 5px 10px rgba(0, 97, 211, .5);
+}
+
+.case-chose{
+    top: 10px !important;
+    right: 80px;
+}
+
+.case-file:disabled{
+    background-color: #586779;
+}
+
+.case-file:disabled:hover{
+    box-shadow: none;
 }

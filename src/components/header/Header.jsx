@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa6";
 import { BsSuitcaseLgFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
-function Header({ user, ...props }) {
+function Header({ team, user, ...props }) {
 
     return (
         <header className='header'>
@@ -22,9 +22,12 @@ function Header({ user, ...props }) {
                     <Link className="header-btn" to={'/user'}>
                         <FaUser className='header-btn-icon'></FaUser>
                     </Link>
-                    <Link className="header-btn" to={'/case'}>
-                        <BsSuitcaseLgFill className='header-btn-icon'></BsSuitcaseLgFill>
-                    </Link>
+                    {
+                        team.id_t &&
+                        <Link className="header-btn" to={'/case'}>
+                            <BsSuitcaseLgFill className='header-btn-icon'></BsSuitcaseLgFill>
+                        </Link>
+                    }
                 </div>
             </div>
         </header>
